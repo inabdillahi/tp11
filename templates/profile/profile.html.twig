@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+<h1 class="mt-3">Mon profile</h1>
+
+<div class="card card-register">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Information de l'utilisateurs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nom d'utilisateur :</td>
+                    <td>{{user.username}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <td>Role</td>
+                    <td>
+                        {% for role in user.roles %}
+                        - {{role}} -
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nombre d'annonces</td>
+                    <td>36 annonces</td>
+                </tr>
+                <tr>
+                    <td class="text-center"><a href="" class="btn btn-warning">Modifer les Mot de passe</a></td>
+                    <td class="text-center"><a href="" class="btn btn-info">Modifer les identifiants</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestions de Utilsiateurs{% endblock %}
+
+{% block body %}
+<h1 class="mt-3">Gestions des Utilisateurs</h1>
+
+
+<div class="table-responsive">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <table class="table mt-3">
+        <thead class="table-success">
+            <tr>
+                <th>#Id</th>
+                <th>Nom d'utilisateurs</th>
+                <th>Email </th>
+                <th>Role</th>
+                <th>Nom d'annonces publier</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if users %}
+            {% for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    {% for role in user.roles %}
+                    {{role}}
+                    {% endfor %}
+                </td>
+                <td>36 annonces</td>
+                <td>
+                    <form action="{{path('delete_user',{id:user.id})}}" method="post">
+                        <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6">
+                    <p class="text-danger">Aucune utilisateurs inscrit</p>
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

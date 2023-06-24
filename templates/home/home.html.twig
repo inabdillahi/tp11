@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block body %}
+<h1 class="mt-3">Liste des annonces public</h1>
+
+<div class="row">
+    {% if mesannonces %}
+    {% for mesannonces in mesannonces %}
+    <div class="col-12 col-md-6 mt-3">
+
+
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{asset('assets/images/annonces/'~ mesannonces.image )}}" width="150px"
+                        class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <a href="{{path('show',{id:mesannonces.id})}}" class="card-title ">{{mesannonces.titre}}</a>
+                            <span class="badge badge-sm bg-info ">{{mesannonces.categorie.nom}}</span>
+
+                        </div>
+                        <p class="card-text">{{mesannonces.description}}</p>
+                        <div class="d-flex justify-content-between">
+                            <span>{{mesannonces.nbrVus}}</span>
+
+                            <span>{{mesannonces.utilisateur.username}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endfor %}
+    {% else %}
+    <p class="text-danger">Vous avez publiez aucune annonces</p>
+    {% endif %}
+    <div class="navigation mt-5">
+        {{ knp_pagination_render(mesannonces) }}
+    </div>
+</div>
+{% endblock %}
